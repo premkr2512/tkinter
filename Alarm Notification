@@ -1,0 +1,65 @@
+import time
+import pyttsx3 as p
+engine = p.init("sapi5")
+voice = engine.getProperty("voices")
+import datetime
+from playsound import playsound
+from win10toast import ToastNotifier
+from tkinter import*
+from tkinter.messagebox import *
+w = Tk()
+#frame = Frame()
+#frame.pack(side = "right")
+#frame2 = Frame()
+#frame2.pack(side = "left")
+level = Label(w,text = "Clock",font = "ariel 60")
+level.grid(row = 2, column = 0 )
+level = Label(w,text = "Alarm Set",font = "ariel 60")
+level.grid(row = 0, column = 0)
+#def speak(audio):
+ ##  engine.runAndWait()
+   # w.after(5000,speak())
+def start():
+    global Time
+    Time = time.strftime("%H:%M:%S  %p")
+    L['text'] = Time
+    L.after(1000,start)
+
+w.title("Clock")
+
+
+L2 = Label(w,text = "Hour",font = "ariel 60",bg = "white", fg ="red" )
+L2.grid(row = 0,column =2)
+Hour = Entry(w,font = "ariel 40", bg = "white", fg = "red")
+Hour.grid(row = 0,column = 3,ipadx = 1,ipady = 1 )
+L2 = Label(w,text = "Min",font = "ariel 60",bg = "white", fg ="red" )
+L2.grid(row = 1,column =2)
+min = Entry(w,font = "ariel 40", bg = "white", fg = "red")
+min.grid(row = 1,column = 3,ipadx = 1,ipady = 1 )
+def set_alarm():
+    toast = ToastNotifier()
+    x = Hour.get()
+    y = min.get()
+    current_time=datetime.datetime.now()
+    showinfo("notification","Alarm set")
+    print(current_time)
+    while True:
+        L.after(1000,start)
+        if int(x) == current_time.hour:
+            if int(y)== current_time.minute:
+                print("Alarm Clock")
+                toast.show_toast("Alarm Clock",duration=1)
+                playsound("C:\\Users\\welcome\\IdeaProjects\\game1\\Extreme - AShamaluevMusic.mp3")
+            if int(y)<current_time.minute:
+                break
+
+btn = Button(w, text= " Set Alarm", font = "ariel 20",bg = "blue",fg ="red",command = set_alarm)
+btn.grid()
+
+L = Label(w,font = "ariel 80",bg = "black", fg ="red")
+L.grid(row = 2,column =2,padx = 100,pady= 100)
+L1 = Label(w,text = "Hour         Min         Sec",font = "ariel 40")
+L1.grid(row = 3,column = 2)
+start()
+#speak("hi prem how are you")
+w.mainloop()
