@@ -7,6 +7,14 @@ from playsound import playsound
 from win10toast import ToastNotifier
 from tkinter import*
 from tkinter.messagebox import *
+from Adafruit_IO import Client, Feed, RequestError
+
+
+ADAFRUIT_IO_KEY = 'dec0c02c71b64a23a79535899a907b09'
+ADAFRUIT_IO_USERNAME = 'Prem2512'
+aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
+
+
 w = Tk()
 #frame = Frame()
 #frame.pack(side = "right")
@@ -16,6 +24,8 @@ level = Label(w,text = "Clock",font = "ariel 60")
 level.grid(row = 2, column = 0 )
 level = Label(w,text = "Alarm Set",font = "ariel 60")
 level.grid(row = 0, column = 0)
+
+
 #def speak(audio):
  ##  engine.runAndWait()
    # w.after(5000,speak())
@@ -24,6 +34,7 @@ def start():
     Time = time.strftime("%H:%M:%S  %p")
     L['text'] = Time
     L.after(1000,start)
+
 
 w.title("Clock")
 
