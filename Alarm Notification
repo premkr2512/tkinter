@@ -1,5 +1,5 @@
 import time
-import pyttsx3 as p
+import pyttsx3 as p     
 engine = p.init("sapi5")
 voice = engine.getProperty("voices")
 import datetime
@@ -44,7 +44,7 @@ def set_alarm():
     showinfo("notification","Alarm set")
     print(current_time)
     while True:
-        L.after(1000,start)
+        #L.after(1000,start)
         if int(x) == current_time.hour:
             if int(y)== current_time.minute:
                 print("Alarm Clock")
